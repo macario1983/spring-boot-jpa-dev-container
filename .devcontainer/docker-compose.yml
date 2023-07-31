@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: springboot_jpa_api
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://springboot_jpa_db:3306/ESCOLA?useTimezone=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_SERVER_PORT=8081
+    ports:
+      - "8080:8080"
+    volumes:
+      - ..:/workspace:cached
+
+  database:
+    container_name: springboot_jpa_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - ../data:/var/lib/mysql:cached
+      - ../sql:/docker-entrypoint-initdb.d/:rw

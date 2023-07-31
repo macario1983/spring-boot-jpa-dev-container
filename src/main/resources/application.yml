@@ -1,0 +1,13 @@
+server:
+    port: 8081
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://springboot_db_api:3306/ESCOLA?useTimezone=true&serverTimezone=UTC
+        username: root
+        password: root
+    flyway:
+        enabled: true
+    jpa:
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL8Dialect
